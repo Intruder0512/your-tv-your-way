@@ -9,7 +9,20 @@ launcher/local.properties
 backup/
 # session screenshots and working notes (may show the Wi-Fi name or account avatar) stay local
 shots/
-work/
+work/*
+# "Your TV, Your Way": the setup files are published, everything else in work/ stays local
+!work/README.md
+!work/*.sh
+!work/*.py
+!work/debloat.txt
+!work/group*.txt
+!work/theme-doom/
+work/theme-doom/*
+!work/theme-doom/config.json
+!work/moods/
+work/moods/*
+!work/moods/titles.json
+!work/moods/titles-research*.json
 # Perfetto traces from tools/trace.py: large, and they hold the TV's process list
 traces/
 .DS_Store
@@ -19,3 +32,9 @@ traces/
 *.aab
 launcher/hs_err_pid*.log
 launcher/replay_pid*.log
+
+# Studio and brand artwork (TMDB posters and backdrops, wallpapers, white app logos) is not redistributed:
+# work/make_moods.py and work/make_logos.py rebuild it locally.
+launcher/app/src/main/assets/moods/posters/
+launcher/app/src/main/assets/moods/backdrops/
+launcher/app/src/main/res/drawable-nodpi/banner_logo_*.png

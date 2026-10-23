@@ -59,10 +59,16 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         /** Hold OK on a tile: the activity shows the tile menu (move, remove from Home, app info). */
         void onTileLongPress(int position, View card);
         void onLibraryUp();
+        /** my_home: a dock item that switches the TV to this input (MyHome.DockInput). */
+        void onInputTile(String inputId);
+        /** my_home: Down from More apps, to the mood cards under it. */
+        void onDeckRequested();
     }
 
     static final class Entry {
-        static final int APP = 0, HOME_SETTINGS = 1, CARD = 2, EMPTY = 3;
+        static final int APP = 0, HOME_SETTINGS = 1, CARD = 2, EMPTY = 3, INPUT = 4;
+        /** INPUT entries carry their TV input id after this prefix in the component's class name. */
+        static final String INPUT_PREFIX = "input:";
 
         final int kind;
         final String label;
@@ -209,6 +215,13 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     /** Tile names and bundled banners that replace the app's own (config.xml, app_labels and app_banners). */
     private final Map<String, String> appLabels, appBanners;
     private final List<Entry> items = new ArrayList<>();
+    /** This TV's own home screen (my_home.xml); off unless setMyHome() is given one that is on. */
+    private MyHome my;
+    /** my_home: only the dock and the More apps button show until More apps is pressed. */
+    private boolean collapsed;
+    /** my_home's mood cards, or null (MoodDeck.load found none). */
+    private MoodDeck moodDeck;
+    private MoodDeckView.Listener deckListener;
 
     AppAdapter(Context ctx, TileListener listener, int dockSize, Config cfg) {
         this.ctx = ctx;
@@ -281,7 +294,8 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             String label = card != null ? card.label : Cards.cleanLabel(
                     appLabels.containsKey(pkg) ? appLabels.get(pkg) : String.valueOf(ri.loadLabel(pm)), pkg);
             if (!seen.add(pkg + '\n' + label)) continue;
-            Drawable banner = bundledBanner(appBanners.get(pkg));
+            Drawable banner = bundledBanner(myHome() ? my.logos.get(pkg) : null);
+            if (banner == null) banner = bundledBanner(appBanners.get(pkg));
             if (banner == null) banner = loadBanner(pm, ri);
             // The icon is only drawn (and sampled for the glow) when there is no banner, so a tile with a
             // banner skips loading and decoding it.
@@ -289,7 +303,8 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (card != null) {
                 fresh.add(new Entry(Entry.CARD, label, component, banner, icon, card.caption, card.accent));
             } else {
-                fresh.add(new Entry(label, component, banner, icon));
+                Integer brand = myHome() ? my.colors.get(pkg) : null;
+                fresh.add(new Entry(Entry.APP, label, component, banner, icon, null, brand != null ? brand : 0));
             }
         }
         Collections.sort(fresh, (a, b) -> {
@@ -316,6 +331,15 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         docked = 0;
         while (docked < fresh.size() && isDocked(fresh.get(docked))) docked++;
+        if (myHome()) {
+            // Input items (a console on an HDMI port) follow the dock apps, inside the dock.
+            for (MyHome.DockInput in : my.inputs) {
+                if (docked >= dockSize) break;
+                fresh.add(docked++, new Entry(Entry.INPUT, in.label,
+                        new ComponentName(ctx.getPackageName(), Entry.INPUT_PREFIX + in.inputId),
+                        bundledBanner(in.logo), null, null, in.color));
+            }
+        }
         emptySlots = dockRow && !reordering ? DockSlots.empty(docked, dockSize, fresh.size(), fillDock) : 0;
         for (int i = 0; i < emptySlots; i++) {
             fresh.add(docked + i, new Entry(Entry.EMPTY, "", new ComponentName(ctx, "empty-dock-slot-" + i),
@@ -324,6 +348,43 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         items.clear();
         items.addAll(fresh);
         notifyDataSetChanged();
+    }
+
+    void setMyHome(MyHome my) {
+        this.my = my;
+        collapsed = my != null && my.on;
+    }
+
+    private boolean myHome() {
+        return my != null && my.on;
+    }
+
+    /** my_home: More apps pressed (false) or Back from the full grid (true). */
+    void setCollapsed(boolean on) {
+        if (!myHome() || collapsed == on) return;
+        collapsed = on;
+        notifyDataSetChanged();
+    }
+
+    boolean isCollapsed() {
+        return myHome() && collapsed;
+    }
+
+    /** Tiles shown: only the dock row while collapsed. */
+    private int shown() {
+        return isCollapsed() ? Math.min(items.size(), dockSize) : items.size();
+    }
+
+    /** The footer row: the App library pill, or my_home's More apps button while collapsed. */
+    private boolean footer() {
+        return showLibrary || isCollapsed();
+    }
+
+    /** What my_home's taglines are keyed by: the package, or an input item's label. */
+    String taglineKeyAt(int position) {
+        if (position < 0 || position >= items.size()) return null;
+        Entry e = items.get(position);
+        return e.kind == Entry.INPUT ? e.label : e.pkg;
     }
 
     /** A banner_* drawable bundled with the launcher, or null for none or a name that is not one. */
@@ -372,14 +433,34 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             View row = LayoutInflater.from(ctx).inflate(R.layout.row_app_library, parent, false);
             View button = row.findViewById(R.id.btnLibrary);
             button.setOnClickListener(v -> listener.onLibraryRequested());
-            button.setOnFocusChangeListener((v, focused) -> { if (focused) listener.onLibraryFocused(); });
+            if (myHome()) {
+                // No pill: plain text that grows a little when focused, like everything else on this home screen.
+                button.setBackground(null);
+                ((TextView) button).setCompoundDrawablesRelative(null, null, null, null);
+                ((TextView) button).setTextColor(0xFFFFFFFF);   // the pill style darkens focused text for a white pill
+                button.setAlpha(0.7f);
+            }
+            button.setOnFocusChangeListener((v, focused) -> {
+                if (myHome()) {
+                    v.animate().scaleX(focused ? 1.15f : 1f).scaleY(focused ? 1.15f : 1f).alpha(focused ? 1f : 0.7f)
+                            .setDuration(200).setInterpolator(new DecelerateInterpolator()).start();
+                }
+                if (focused) listener.onLibraryFocused();
+            });
             button.setOnKeyListener((v, key, event) -> {
                 if (event.getAction() != KeyEvent.ACTION_DOWN) return false;
                 if (key == KeyEvent.KEYCODE_DPAD_UP) listener.onLibraryUp();
+                if (key == KeyEvent.KEYCODE_DPAD_DOWN && deckShown()) listener.onDeckRequested();
                 return key == KeyEvent.KEYCODE_DPAD_UP || key == KeyEvent.KEYCODE_DPAD_DOWN
                         || key == KeyEvent.KEYCODE_DPAD_LEFT || key == KeyEvent.KEYCODE_DPAD_RIGHT;
             });
             return new RecyclerView.ViewHolder(row) { };
+        }
+        if (viewType == 2) {
+            MoodDeckView view = new MoodDeckView(ctx, moodDeck, deckListener);
+            view.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    Math.round(430 * ctx.getResources().getDisplayMetrics().density)));
+            return new RecyclerView.ViewHolder(view) { };
         }
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_app, parent, false);
         float density = parent.getResources().getDisplayMetrics().density;
@@ -407,7 +488,14 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (isLibraryAt(position)) return;
+        if (isDeckAt(position)) return;
+        if (isLibraryAt(position)) {
+            if (myHome()) {
+                ((TextView) holder.itemView.findViewById(R.id.btnLibrary))
+                        .setText(collapsed ? R.string.my_more_apps : R.string.app_library);
+            }
+            return;
+        }
         Holder h = (Holder) holder;
         Entry e = items.get(position);
         if (e.kind == Entry.EMPTY) {
@@ -425,7 +513,13 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         h.card.setFocusable(true);
         h.name.setText(e.name);
         // The dock has no labels, unless always_show_names asks for them (DockDecoration then makes room in the band).
-        h.name.setVisibility(dockRow && position < dockSize && restNameAlpha == 0f ? View.INVISIBLE : View.VISIBLE);
+        // my_home: the focused dock logo's name fades in under it.
+        h.name.setVisibility(dockRow && position < dockSize && restNameAlpha == 0f && !myHome() ? View.INVISIBLE : View.VISIBLE);
+        // my_home: dock logos float on the wallpaper, whole (fitted, not cropped), with no card, corners or shadow.
+        boolean floating = myHome() && position < dockSize && e.banner != null;
+        h.banner.setScaleType(floating ? ImageView.ScaleType.FIT_CENTER : ImageView.ScaleType.CENTER_CROP);
+        h.card.setClipToOutline(!floating);
+        h.card.setOutlineProvider(floating ? null : h.roundOutline);
         boolean focused = h.card.isFocused();   // a rebind after reload() can hit the focused tile
         h.name.setAlpha(focused ? 1f : restNameAlpha);
         h.card.setScaleX(focused && animations ? focusScale() : 1f);
@@ -436,7 +530,7 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         h.banner.setScaleY(focused && advancedEffects ? 1.035f : 1f);
         // A fully opaque banner covers the whole card (centerCrop), so the card's own fill under it is drawn for
         // nothing on every frame; keep it under banners with transparent parts and under icon tiles.
-        h.card.setBackground(e.banner != null && e.banner.getOpacity() == PixelFormat.OPAQUE ? null : h.cardBackground);
+        h.card.setBackground(floating || e.banner != null && e.banner.getOpacity() == PixelFormat.OPAQUE ? null : h.cardBackground);
         if (e.banner != null) {
             h.banner.setImageDrawable(e.banner);
             h.banner.setVisibility(View.VISIBLE);
@@ -474,6 +568,10 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             return;
         }
+        if (e.kind == Entry.INPUT) {
+            listener.onInputTile(e.component.getClassName().substring(Entry.INPUT_PREFIX.length()));
+            return;
+        }
         Intent i = new Intent(Intent.ACTION_MAIN)
                 .setComponent(e.component)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
@@ -500,14 +598,32 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return items.size() + (showLibrary ? 1 : 0);
+        return shown() + (footer() ? 1 : 0) + (deckShown() ? 1 : 0);
     }
 
-    int appCount() { return items.size(); }
+    /** my_home: the mood cards, a full-width row under More apps while the grid is folded away. */
+    boolean deckShown() {
+        return isCollapsed() && moodDeck != null;
+    }
 
-    boolean isLibraryAt(int position) { return showLibrary && position == items.size(); }
+    boolean isDeckAt(int position) {
+        return deckShown() && position == shown() + (footer() ? 1 : 0);
+    }
 
-    @Override public int getItemViewType(int position) { return isLibraryAt(position) ? 1 : 0; }
+    int deckPosition() {
+        return shown() + (footer() ? 1 : 0);
+    }
+
+    void setMoodDeck(MoodDeck deck, MoodDeckView.Listener listener) {
+        moodDeck = deck;
+        deckListener = listener;
+    }
+
+    int appCount() { return shown(); }
+
+    boolean isLibraryAt(int position) { return footer() && position == shown(); }
+
+    @Override public int getItemViewType(int position) { return isDeckAt(position) ? 2 : isLibraryAt(position) ? 1 : 0; }
 
     boolean containsPackage(String pkg) {
         for (Entry entry : items) if (entry.pkg.equals(pkg)) return true;
@@ -516,6 +632,7 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public long getItemId(int position) {
+        if (isDeckAt(position)) return Long.MIN_VALUE + 1;
         return isLibraryAt(position) ? Long.MIN_VALUE : items.get(position).component.flattenToShortString().hashCode();
     }
 
@@ -687,6 +804,8 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         /** Alpha of the name while the tile is not focused (always_show_names). */
         final float restNameAlpha;
         final boolean overshoot;
+        /** The rounded tile shape; my_home's floating dock logos drop it (no clip, no shadow). */
+        final ViewOutlineProvider roundOutline;
 
         Holder(View v, TileListener listener, boolean animations, boolean advancedEffects,
                boolean reducedMotion, float restNameAlpha, boolean overshoot) {
@@ -704,13 +823,14 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             this.overshoot = overshoot;
 
             final float density = v.getResources().getDisplayMetrics().density;
-            card.setOutlineProvider(new ViewOutlineProvider() {
+            roundOutline = new ViewOutlineProvider() {
                 @Override
                 public void getOutline(View view, Outline outline) {
                     // 16dp at the design width, scaled down with the tile so small tiles keep the same shape.
                     outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), cornerRadius(view.getWidth(), density));
                 }
-            });
+            };
+            card.setOutlineProvider(roundOutline);
             card.setClipToOutline(true);
 
             card.setOnKeyListener((view, keyCode, event) -> {

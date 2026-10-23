@@ -1,3 +1,12 @@
+> **Your TV, Your Way** is a personal fork of [CleanYourTV](https://github.com/Gathin23/cleanyourtv) by Gathin23
+> (MIT licence), set up on a Hisense HiSmartTV A4 (Android TV 9) following the "Your TV, Your Way" guide.
+> On top of the upstream launcher it adds floating white dock logos with taglines that follow the wallpaper,
+> HDMI inputs as dock items, a More apps button, a wallpaper-only screensaver, the weather, a personal welcome
+> line spoken once when the TV wakes, hourly wallpaper switching, and a "Don't have time to browse?" deck of
+> mood cards. All of it is switched on by `launcher/app/src/main/res/values/my_home.xml` (`my_home`).
+> Setup notes, scripts and the debloat list are in [work/README.md](work/README.md). Posters, backdrops,
+> wallpapers and app logos are not included; `work/make_moods.py` and `work/make_logos.py` rebuild them.
+
 <p align="center">
   <a href="https://cleanyour.tv"><img src="https://raw.githubusercontent.com/Gathin23/cleanyourtv/main/docs/banner.png" alt="CleanYourTV. Your TV, minus the ads. Strip the bloatware from any Android TV or Google TV over Wi-Fi and replace the ad-filled home screen with a clean launcher that looks like an Apple TV. No root, no cable, nothing uninstalled, and a one-line restore." width="800"></a>
 </p>

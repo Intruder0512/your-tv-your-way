@@ -1,0 +1,6 @@
+com.seraphic.browser                   # Hisense browser
+com.google.android.music               # Play Music, discontinued
+com.google.android.videos
+com.google.android.play.games
+com.google.android.apps.nbu.smartconnect.tv
+

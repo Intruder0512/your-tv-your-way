@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This TV's own home screen ("Your TV, Your Way", parts 3 and 5), read by MyHome. Off with my_home=false,
+  which gives back the stock cleanyourtv look. Rebuild with work/build-and-install.sh after a change.
+-->
+<resources>
+
+    <!-- Master switch: time only, bare top icons, floating dock logos with taglines, More apps, screensaver. -->
+    <bool name="my_home">true</bool>
+
+    <!-- Dock artwork: "package=drawable" from res/drawable-nodpi (white logos on transparent, work/make_logos.py). -->
+    <string-array name="my_dock_logos" translatable="false">
+        <item>com.netflix.ninja=banner_logo_netflix</item>
+        <item>com.google.android.youtube.tv=banner_logo_youtube</item>
+        <item>com.amazon.amazonvideo.livingroom=banner_logo_prime</item>
+        <item>in.startv.hotstar=banner_logo_jiohotstar</item>
+    </string-array>
+
+    <!-- Glow colour behind the dock per app: "package=#RRGGBB". -->
+    <string-array name="my_dock_colors" translatable="false">
+        <item>com.netflix.ninja=#E50914</item>
+        <item>com.google.android.youtube.tv=#FF0033</item>
+        <item>com.amazon.amazonvideo.livingroom=#1A98FF</item>
+        <item>in.startv.hotstar=#7B3FE4</item>
+    </string-array>
+
+    <!-- Dock items that switch the TV to an input: "label|TV input id|drawable|#colour", after the apps. -->
+    <string-array name="my_dock_inputs" translatable="false">
+        <item>PlayStation 5|com.hisense.tv.hitvinput/.hdmi.HdmiTvInputService/HW5|banner_logo_ps5|#0070D1</item>
+        <item>Airtel TV|com.hisense.tv.hitvinput/.hdmi.HdmiTvInputService/HW4|banner_logo_airtel|#E40000</item>
+    </string-array>
+
+    <!-- Lines above the dock for the focused item: "key=line|line|…" (key: package, or the input's label).
+         With several lines, the next one shows each time Home comes back. -->
+    <string-array name="my_taglines" translatable="false">
+        <item>com.netflix.ninja=I am Iron Man.|Sometimes you gotta run before you can walk.</item>
+        <item>com.google.android.youtube.tv=Doom does not bow.|Doom answers to no one.</item>
+        <item>com.amazon.amazonvideo.livingroom=Avengers… assemble.|We have a Hulk.</item>
+        <item>in.startv.hotstar=I can do this all day.|Wakanda forever.</item>
+        <item>PlayStation 5=Genius. Billionaire. Playboy. Philanthropist.|Suit up.</item>
+        <item>Airtel TV=Live from the Baxter Building.|Breaking news, Latveria.</item>
+        <!-- "look/key=…": only while the wallpaper of that name is up (wallpapers/2-batman-superman.jpg is the
+             look "batman-superman"); the plain lines above are for every other wallpaper. -->
+        <item>batman-superman/com.netflix.ninja=I\'m Batman.|Tell me, do you bleed?</item>
+        <item>batman-superman/com.google.android.youtube.tv=Men are still good.|You\'re not brave. Men are brave.</item>
+        <item>batman-superman/com.amazon.amazonvideo.livingroom=It\'s not an S. On my world it means hope.|The world only makes sense if you force it to.</item>
+        <item>batman-superman/in.startv.hotstar=Why do we fall?|Twenty years in Gotham.</item>
+        <item>batman-superman/PlayStation 5=Suit up, Bruce.|The Batcave is open.</item>
+        <item>batman-superman/Airtel TV=Live from the Daily Planet.|Breaking news, Gotham.</item>
+    </string-array>
+
+    <!-- Your name, for the welcome line under the clock and the spoken welcome. Empty turns both off. -->
+    <string name="my_name" translatable="false">YOUR_NAME</string>
+    <string name="my_welcome_question">What do you want to enjoy today?</string>
+    <!-- "Good evening, <my_name>. What do you want to enjoy today?" -->
+    <string name="my_welcome">%1$s, %2$s. %3$s</string>
+    <!-- Say the welcome aloud (the TV's own text-to-speech voice) once each time the TV wakes up. -->
+    <bool name="my_speak_welcome">true</bool>
+
+    <!-- The button under the dock that opens the grid of every other app. -->
+    <string name="my_more_apps">More apps</string>
+    <string name="my_temperature">%1$d°C</string>
+
+    <!-- Mood cards (assets/moods/moods.json, made by work/make_moods.py). -->
+    <string name="my_deck_title">Don\'t have time to browse?</string>
+    <string name="my_opening_in">Opening in %1$d…</string>
+    <plurals name="my_titles">
+        <item quantity="one">%1$d title</item>
+        <item quantity="other">%1$d titles</item>
+    </plurals>
+
+    <!-- Minutes Home may sit untouched before everything fades away and only the wallpaper stays. 0 is off. -->
+    <integer name="my_screensaver_minutes">3</integer>
+
+    <!-- Weather next to the clock from Open-Meteo (no key). Empty latitude turns it off; put your city's, e.g. 28.61 and 77.21. Never shows a place name. -->
+    <string name="my_weather_latitude" translatable="false"></string>
+    <string name="my_weather_longitude" translatable="false"></string>
+</resources>

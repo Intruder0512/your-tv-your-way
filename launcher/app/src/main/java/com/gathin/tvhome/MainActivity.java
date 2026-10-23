@@ -116,7 +116,43 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private long settingsRevision;
     /** Idle time on Home before ClockActivity; 0 is off (config.xml, home_idle_clock_minutes). */
     private long idleClockMs;
-    private final Runnable showIdleClock = () -> startActivity(new Intent(this, ClockActivity.class));
+    /** This TV's own home screen (res/values/my_home.xml, MyHome). */
+    private MyHome my;
+    private final Runnable showIdleClock = () -> {
+        if (my.on) fadeToWallpaper();
+        else startActivity(new Intent(this, ClockActivity.class));
+    };
+    /** Returns to Home so far: picks which of an item's taglines shows. */
+    private int homeVisits;
+    /** my_home: idle on Home faded everything but the wallpaper; the next key brings it back and is used up. */
+    private boolean screensaverOn, screensaverKeyUp;
+    private View content, myBottomShade, myScrollShade;
+    private TextView weatherView, welcomeView;
+    /** my_speak_welcome: say the welcome at the next resume; set at start and whenever the screen goes off. */
+    private boolean speakPending = true;
+    private android.speech.tts.TextToSpeech tts;
+    private boolean ttsReady;
+    /**
+     * The wallpaper rotation loads the next picture in the background and records it once it is on screen; the
+     * tagline (which follows the picture, MyHome.look) is chosen when a dock item takes focus, usually before that.
+     * Refresh it when the record changes. A field, so the preferences keep a strong reference to it.
+     */
+    private SharedPreferences.OnSharedPreferenceChangeListener wallpaperListener;
+
+    private void onWallpaperChanged(String key) {
+        if (!"image".equals(key) || !heroShown || lastFocused < 0 || lastFocused >= COLUMNS) return;
+        String line = heroText(lastFocused);
+        if (line.contentEquals(heroName.getText())) return;
+        hero.animate().alpha(0f).setDuration(150).withEndAction(() -> {
+            heroName.setText(line);
+            hero.animate().alpha(1f).setDuration(250).start();
+        }).start();
+    }
+    private final BroadcastReceiver screenOffReceiver = new BroadcastReceiver() {
+        @Override public void onReceive(Context context, Intent intent) {
+            speakPending = true;
+        }
+    };
     private String liveTvAction;
     private String liveTvInputId;
     /** The app library is on (config.xml, app_library): only then can the tile menu take an app off Home. */
@@ -355,6 +391,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         density = getResources().getDisplayMetrics().density;
         // config.xml, overlaid by config.json from a pushed theme (see Config and tools/theme.sh).
         Config cfg = Config.load(this);
+        my = MyHome.load(this);
         appLibrarySelection = cfg.appLibrarySelection;
         // restore_key_services: after a force stop, put back the remote's accessibility helpers that Android took
         // off the list (needs WRITE_SECURE_SETTINGS, granted by build-and-install with RESTORE_KEY_SERVICES=1).
@@ -372,7 +409,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         festival = cfg.festival;
         festive = festival.active(LocalDate.now());
         liveTvPkg = cfg.liveTvPackage;
-        idleClockMs = cfg.homeIdleClockMinutes * MINUTE_MS;
+        idleClockMs = (my.on ? my.screensaverMinutes : cfg.homeIdleClockMinutes) * MINUTE_MS;
         bootToLiveTv = cfg.bootToLiveTv;
         liveTvAction = cfg.liveTvAction;
         liveTvInputId = cfg.liveTvInputId;
@@ -400,7 +437,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         // The glow is one bitmap, so its alpha can be applied while drawing it. Otherwise every frame of
         // a fade renders it into a full-screen offscreen buffer first.
         ambient.forceHasOverlappingRendering(false);
-        ambientGlow = cfg.ambientGlow;
+        ambientGlow = cfg.ambientGlow || my.on;   // my_home: the soft glow behind the dock in the app's colour
         appGlow = cfg.appGlow;
         if (!ambientGlow) ambient.setVisibility(View.GONE);
         heroName = findViewById(R.id.heroName);
@@ -419,7 +456,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if (cinematic) setUpCinematicShelf(cfg.cinematicScrim);
         // dock_title false: the name above the dock (and the cinematic lines under it) never shows; the glow
         // still follows the dock.
-        if (!cfg.dockTitle) hero.setVisibility(View.GONE);
+        if (!cfg.dockTitle && !my.on) hero.setVisibility(View.GONE);
         greeting = findViewById(R.id.greeting);
         clockBlock = findViewById(R.id.leftBlock);
         greetingColor = greeting.getCurrentTextColor();
@@ -495,7 +532,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             }
         });
         ((GridLayoutManager) grid.getLayoutManager()).setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override public int getSpanSize(int position) { return adapter != null && adapter.isLibraryAt(position) ? COLUMNS : 1; }
+            @Override public int getSpanSize(int position) {
+                return adapter != null && (adapter.isLibraryAt(position) || adapter.isDeckAt(position)) ? COLUMNS : 1;
+            }
         });
         grid.setHasFixedSize(true);
         grid.setItemAnimator(null);
@@ -511,7 +550,11 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             public void onChildViewDetachedFromWindow(@NonNull View v) {
             }
         });
-        if (dockRow) grid.addItemDecoration(new DockDecoration(COLUMNS, density, cinematic, cfg.alwaysShowNames, cfg.dockOpacity, cfg.dockGlass, cfg.dockEvenPadding));
+        if (dockRow) {
+            DockDecoration dock = new DockDecoration(COLUMNS, density, cinematic, cfg.alwaysShowNames, cfg.dockOpacity, cfg.dockGlass, cfg.dockEvenPadding);
+            dock.drawBand = !my.on;
+            grid.addItemDecoration(dock);
+        }
         if (cfg.fadeRows) TopFade.attach(grid, 48 * density);
         // Reduced motion: the tiles are simply there, with no entrance (reloadApps skips it there too).
         if (animations && !reducedMotion) {
@@ -519,6 +562,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                     AnimationUtils.loadAnimation(this, R.anim.tile_enter), 0.06f));
         }
         adapter = new AppAdapter(this, this, COLUMNS, cfg);
+        adapter.setMyHome(my);
+        if (my.on) adapter.setMoodDeck(MoodDeck.load(this), deckListener);
         dockApps = cfg.dockApps;
         fillDockLeavesSlots = !cfg.fillDock;
         Order savedOrder = Order.load(Order.file(this));
@@ -545,6 +590,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             if (MainActivity.this.dockRow && cfg.dockTitle && rowsBelowDock > 0) want = Math.max(want, (int) (AppAdapter.TITLE_ROOM_DP * density));
             // No dock to push down: the grid starts at the top, with room for the first row's zoom and glass.
             if (!MainActivity.this.dockRow) want = (int) (AppAdapter.TOP_ROOM_DP * density);
+            // my_home: the dock sits low, with the More apps button (an 84dp row) under it on screen.
+            else if (my.on) want = Math.max(shelfClearance, h - dockRow - (int) (96 * density));
             if (grid.getPaddingTop() != want) {
                 grid.setPadding(grid.getPaddingLeft(), want, grid.getPaddingRight(), grid.getPaddingBottom());
             }
@@ -557,6 +604,10 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         grid.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView rv, int dx, int dy) {
+                if (myScrollShade != null && my.on) {
+                    // The wallpaper darkens as the page scrolls down into the grid, up to 60%.
+                    myScrollShade.setAlpha(Math.min(0.6f, rv.computeVerticalScrollOffset() / (500f * density) * 0.6f));
+                }
                 if (!glassShown) return;
                 glassTargetY -= dy;
                 glassScrollShift -= dy;
@@ -685,6 +736,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             }
         }
         if (festive) applyFestiveSkin((TextView) btnInputs, (TextView) btnSettings);
+        if (my.on) applyMyHome((TextView) btnSettings);
 
         // Hide the glass when focus leaves the tiles.
         getWindow().getDecorView().getViewTreeObserver().addOnGlobalFocusChangeListener((oldF, newF) -> {
@@ -717,6 +769,214 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         }
         // Not after recreate(): the launch intent survives it and would open the settings again.
         if (savedInstanceState == null && !openLauncherSettingsIfAsked(getIntent())) openInputsIfAsked(getIntent());
+    }
+
+    // ---- my_home (res/values/my_home.xml) ---------------------------------------------------------------
+
+    /**
+     * The quiet base from "Your TV, Your Way": the time alone top left (with the weather), bare white icons top
+     * right, no highlight anywhere (focus only grows), the tagline above the dock in light type, a soft gradient
+     * at the bottom and a shade that deepens as the page scrolls.
+     */
+    private void applyMyHome(TextView btnSettings) {
+        greeting.setVisibility(View.GONE);
+        // The clock row: the time, AM/PM, the divider and the date column. Keep the time, drop the date.
+        ViewGroup clockRow = (ViewGroup) findViewById(R.id.clock).getParent();
+        for (int i = 2; i < clockRow.getChildCount(); i++) clockRow.getChildAt(i).setVisibility(View.GONE);
+        if (my.weather()) {
+            weatherView = new TextView(this);
+            weatherView.setTextColor(0xE6FFFFFF);
+            weatherView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f);
+            weatherView.setTypeface(((TextView) findViewById(R.id.clock)).getTypeface());
+            weatherView.setIncludeFontPadding(false);
+            weatherView.setCompoundDrawablePadding(Math.round(10 * density));
+            weatherView.setVisibility(View.INVISIBLE);   // until the first reading
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.gravity = Gravity.BOTTOM;
+            lp.leftMargin = Math.round(28 * density);
+            lp.bottomMargin = Math.round(7 * density);
+            clockRow.addView(weatherView, lp);
+        }
+        // Bare icons: no pill behind them, always white, a little dimmed until focused, when they grow.
+        ColorStateList white = ColorStateList.valueOf(0xFFFFFFFF);
+        for (View v : new View[]{btnInputs, btnWifi, btnReorder, btnLibraryTop, btnSettings}) {
+            TextView b = (TextView) v;
+            if (b.getText() != null && b.getText().length() > 0) makeIconOnly(b);
+            b.setBackground(null);
+            b.setCompoundDrawableTintList(white);
+            b.setAlpha(0.75f);
+            b.setOnFocusChangeListener((view, focused) -> view.animate()
+                    .scaleX(focused ? 1.3f : 1f).scaleY(focused ? 1.3f : 1f).alpha(focused ? 1f : 0.75f)
+                    .setDuration(reducedMotion ? Motion.REDUCED_MS : 200).start());
+        }
+        wifiOnlineTint = null;   // wifi_status_color would recolour the bare icon
+        if (!getString(R.string.my_name).trim().isEmpty()) {
+            // "Good evening, <my_name>. What do you want to enjoy today?" under the time (text in updateGreeting).
+            welcomeView = new TextView(this);
+            welcomeView.setTextColor(0xD9FFFFFF);
+            welcomeView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f);
+            welcomeView.setTypeface(((TextView) findViewById(R.id.clock)).getTypeface());
+            welcomeView.setSingleLine(true);
+            LinearLayout.LayoutParams wl = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            wl.topMargin = Math.round(8 * density);
+            wl.leftMargin = Math.round(4 * density);
+            ((ViewGroup) clockBlock).addView(welcomeView, wl);
+            if (getResources().getBoolean(R.bool.my_speak_welcome)) {
+                registerReceiver(screenOffReceiver, new IntentFilter(Intent.ACTION_SCREEN_OFF));
+            }
+        }
+        wallpaperListener = (prefs, key) -> onWallpaperChanged(key);
+        getSharedPreferences("wallpaper_rotation", MODE_PRIVATE).registerOnSharedPreferenceChangeListener(wallpaperListener);
+        glass.setVisibility(View.GONE);
+        heroName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30f);
+        heroName.setLetterSpacing(0f);
+        content = findViewById(R.id.content);
+        myBottomShade = findViewById(R.id.myBottomShade);
+        myScrollShade = findViewById(R.id.myScrollShade);
+        if (myBottomShade != null) {
+            Bitmap bmp = Bitmap.createBitmap(4, 270, Bitmap.Config.ARGB_8888);
+            Paint paint = new Paint();
+            paint.setShader(new LinearGradient(0, 0, 0, 270,
+                    new int[]{0x00000000, 0x00000000, 0x99000000, 0xE6000000}, new float[]{0f, 0.42f, 0.75f, 1f},
+                    Shader.TileMode.CLAMP));
+            new Canvas(bmp).drawRect(0, 0, 4, 270, paint);
+            BitmapDrawable shade = new BitmapDrawable(getResources(), bmp);
+            shade.setGravity(Gravity.FILL);
+            myBottomShade.setBackground(shade);
+            myBottomShade.setVisibility(View.VISIBLE);
+        }
+        if (myScrollShade != null) myScrollShade.setVisibility(View.VISIBLE);
+    }
+
+    /** The scene layer now showing (A or B); the other fades in with the next scene. */
+    private boolean deckSceneOnA;
+
+    private final MoodDeckView.Listener deckListener = new MoodDeckView.Listener() {
+        @Override public void onDeckFocus(boolean focused) {
+            if (focused) {
+                hideHero();
+                hideGlass();
+            } else {
+                for (int id : new int[]{R.id.myDeckSceneA, R.id.myDeckSceneB}) {
+                    findViewById(id).animate().alpha(0f).setDuration(300).start();
+                }
+            }
+        }
+
+        @Override public void onDeckUp() {
+            focusLibrary();
+        }
+
+        @Override public void onDeckBackdrop(Bitmap scene) {
+            ImageView in = findViewById(deckSceneOnA ? R.id.myDeckSceneB : R.id.myDeckSceneA);
+            ImageView out = findViewById(deckSceneOnA ? R.id.myDeckSceneA : R.id.myDeckSceneB);
+            deckSceneOnA = !deckSceneOnA;
+            in.animate().cancel();
+            // Both layers sit over the wallpaper and under the home screen (activity_main.xml): crossfade them.
+            in.setImageBitmap(scene);
+            in.animate().alpha(scene != null ? 1f : 0f).setDuration(450).start();
+            out.animate().alpha(0f).setDuration(450).start();
+        }
+    };
+
+    @Override
+    public void onDeckRequested() {
+        int pos = adapter.deckPosition();
+        RecyclerView.ViewHolder vh = grid.findViewHolderForAdapterPosition(pos);
+        if (vh != null) {
+            vh.itemView.requestFocus();
+            return;
+        }
+        cancelPendingFocusScroll();
+        pendingFocusScroll = new RecyclerView.OnScrollListener() {
+            @Override public void onScrollStateChanged(@NonNull RecyclerView rv, int state) {
+                if (state != RecyclerView.SCROLL_STATE_IDLE) return;
+                rv.removeOnScrollListener(this);
+                if (pendingFocusScroll != this) return;
+                pendingFocusScroll = null;
+                RecyclerView.ViewHolder h = rv.findViewHolderForAdapterPosition(pos);
+                if (h != null) h.itemView.requestFocus();
+            }
+        };
+        grid.addOnScrollListener(pendingFocusScroll);
+        grid.smoothScrollToPosition(pos);
+    }
+
+    /** The line above the dock for this item: its tagline (the next one each visit), or its name. */
+    private String heroText(int position) {
+        String line = my.on ? my.tagline(MyHome.look(this), adapter.taglineKeyAt(position), homeVisits) : null;
+        return line != null ? line : adapter.labelAt(position);
+    }
+
+    /** "Good evening, <my_name>. What do you want to enjoy today?" for the hour now. */
+    private String welcomeText() {
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int part = hour >= 5 && hour < 12 ? R.string.good_morning : hour >= 12 && hour < 17 ? R.string.good_afternoon
+                : R.string.good_evening;   // "Good night" sounds like a goodbye, so late night stays "evening"
+        return getString(R.string.my_welcome, getString(part), getString(R.string.my_name).trim(),
+                getString(R.string.my_welcome_question));
+    }
+
+    /** Says the welcome in the TV's text-to-speech voice, once the engine is up. */
+    private void speakWelcome() {
+        if (ttsReady) {
+            tts.speak(welcomeText(), android.speech.tts.TextToSpeech.QUEUE_FLUSH, null, "welcome");
+            return;
+        }
+        if (tts != null) return;   // still starting; it speaks when ready
+        tts = new android.speech.tts.TextToSpeech(getApplicationContext(), status -> {
+            if (status != android.speech.tts.TextToSpeech.SUCCESS) return;
+            int lang = tts.setLanguage(new Locale("en", "IN"));
+            if (lang < android.speech.tts.TextToSpeech.LANG_AVAILABLE) tts.setLanguage(Locale.US);
+            ttsReady = true;
+            if (!isFinishing()) tts.speak(welcomeText(), android.speech.tts.TextToSpeech.QUEUE_FLUSH, null, "welcome");
+        });
+    }
+
+    private void updateWeather() {
+        if (weatherView == null) return;
+        Weather.update(this, my.latitude, my.longitude, (temp, code) -> {
+            int size = Math.round(24 * density);
+            Drawable icon = new Weather.Icon(code, 1.6f * density);
+            icon.setBounds(0, 0, size, size);
+            weatherView.setCompoundDrawables(icon, null, null, null);
+            weatherView.setText(getString(R.string.my_temperature, temp));
+            weatherView.setVisibility(View.VISIBLE);
+        });
+    }
+
+    /** What the screensaver fades, and the alpha each had, to put back exactly (the glow and tagline vary). */
+    private View[] screensaverViews;
+    private final float[] screensaverAlphas = new float[5];
+
+    /** Home sat idle: everything fades away but the wallpaper. */
+    private void fadeToWallpaper() {
+        if (screensaverOn || !hasWindowFocus()) return;
+        screensaverOn = true;
+        screensaverViews = new View[]{content, myBottomShade, myScrollShade, hero, ambient};
+        for (int i = 0; i < screensaverViews.length; i++) {
+            View v = screensaverViews[i];
+            if (v == null) continue;
+            v.animate().cancel();
+            screensaverAlphas[i] = v.getAlpha();
+            v.animate().alpha(0f).setDuration(1500).start();
+        }
+    }
+
+    /** Any key: the home screen comes back (the key itself does nothing else). */
+    private void wakeFromWallpaper(boolean instant) {
+        if (!screensaverOn) return;
+        screensaverOn = false;
+        for (int i = 0; i < screensaverViews.length; i++) {
+            View v = screensaverViews[i];
+            if (v == null) continue;
+            v.animate().cancel();
+            if (instant) v.setAlpha(screensaverAlphas[i]);
+            else v.animate().alpha(screensaverAlphas[i]).setDuration(300).start();
+        }
+        restartIdleClock();
     }
 
     /**
@@ -824,6 +1084,13 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             return;
         }
         restartIdleClock();
+        homeVisits++;
+        updateWeather();
+        if (welcomeView != null && speakPending && getResources().getBoolean(R.bool.my_speak_welcome)) {
+            // The TV just woke up (or the launcher started): say hello, a moment after the picture is back.
+            speakPending = false;
+            handler.postDelayed(this::speakWelcome, 1500);
+        }
         promptsPaused = false;
         if (grid.getAdapter() == null) grid.setAdapter(adapter);   // dropped by onTrimMemory
         switch (tileRefresh.onResume(packagesChangedSinceRebuild())) {
@@ -1023,6 +1290,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     protected void onPause() {
         super.onPause();
         root.removeCallbacks(showIdleClock);
+        if (my.on) wakeFromWallpaper(true);
         endReorder();   // Home or another app while reordering keeps the order so far
         wallpaperPlayer.stop();
         stopAmbientAnimation();
@@ -1086,6 +1354,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(packageReceiver);
+        if (welcomeView != null && getResources().getBoolean(R.bool.my_speak_welcome)) unregisterReceiver(screenOffReceiver);
+        if (tts != null) tts.shutdown();
+        if (my.on) getSharedPreferences("wallpaper_rotation", MODE_PRIVATE).unregisterOnSharedPreferenceChangeListener(wallpaperListener);
         wallpaperPlayer.close();
         ConnectivityManager cm = getSystemService(ConnectivityManager.class);
         TvInputManager tim = (TvInputManager) getSystemService(TV_INPUT_SERVICE);
@@ -1128,6 +1399,16 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
      */
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        // my_home screensaver: the first key only wakes Home; its release is swallowed too.
+        if (screensaverOn && event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() != KeyEvent.KEYCODE_HOME) {
+            wakeFromWallpaper(false);
+            screensaverKeyUp = true;
+            return true;
+        }
+        if (screensaverKeyUp && event.getAction() == KeyEvent.ACTION_UP) {
+            screensaverKeyUp = false;
+            return true;
+        }
         if (handleSettingsKey(event)) return true;
         if (tileMenuEnabled && !reordering && openPopup == null && cardPrompt == null
                 && event.getKeyCode() == KeyEvent.KEYCODE_MENU) {
@@ -1448,13 +1729,29 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
     @Override
     public void onBackPressed() {
-        // Home screen: Back goes nowhere.
+        // Home screen: Back goes nowhere, except out of my_home's full app grid, back to the dock.
+        if (my.on && !adapter.isCollapsed()) {
+            adapter.setCollapsed(true);
+            grid.scrollToPosition(0);
+            grid.post(() -> focusTile(Math.min(lastFocused, COLUMNS - 1)));
+        }
+    }
+
+    @Override
+    public void onInputTile(String inputId) {
+        openInput(inputId);
     }
 
     // ---- glass highlight -------------------------------------------------------------------------
 
     @Override
     public void onLibraryRequested() {
+        if (my.on && adapter.isCollapsed()) {
+            // More apps: the rest of the apps open up under the dock; Back folds them away again.
+            adapter.setCollapsed(false);
+            grid.post(() -> focusTile(COLUMNS));
+            return;
+        }
         if (appLibrary != null) appLibrary.close();
         if (openPopup != null) openPopup.dismiss();
         libraryFocusPending = false;
@@ -1577,7 +1874,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     // ---- top shelf -------------------------------------------------------------------------------
 
     private void showHero(int position, float dockTopInRoot) {
-        String label = adapter.labelAt(position);
+        String label = heroText(position);
         int color = adapter.ambientColorAt(position);
         float y = dockTopInRoot - 14 * density - 26 * density - hero.getHeight();
         boolean changed = !label.contentEquals(heroName.getText());
@@ -1791,6 +2088,19 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                         new int[]{0xA6FFFFFF, 0x47FFFFFF, 0x00FFFFFF},
                         new float[]{0f, 0.5f, 1f},
                         Shader.TileMode.CLAMP));
+            } else if (my.on) {
+                // A wide, low oval behind the dock: the app's colour rises off the bottom of the screen.
+                canvas.save();
+                canvas.scale(1f, 0.42f, w * 0.5f, h * 0.86f);
+                paint.setShader(new RadialGradient(
+                        w * 0.5f, h * 0.86f, w * 0.5f,
+                        new int[]{0x8CFFFFFF, 0x38FFFFFF, 0x00FFFFFF},
+                        new float[]{0f, 0.5f, 1f},
+                        Shader.TileMode.CLAMP));
+                canvas.drawRect(0, 0, w, h * 2f, paint);
+                canvas.restore();
+                paint.setShader(null);
+                paint.setColor(0x00000000);
             } else if (Config.GLOW_HORIZON.equals(glowStyle)) {
                 // The colour washes down from the top edge and fades out three quarters of the way down,
                 // with a brighter band along the top like light over a horizon.
@@ -2097,7 +2407,8 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         // escapes up into the top bar. Mid-row moves fall through to the default focus search.
         if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
             boolean forward = rtlAppGrid ? keyCode == KeyEvent.KEYCODE_DPAD_LEFT : keyCode == KeyEvent.KEYCODE_DPAD_RIGHT;
-            if (forward && position == adapter.focusablePosition(count - 1) && adapter.isLibraryAt(count)) {
+            // my_home: Left and Right stop at the row's ends; More apps is reached with Down.
+            if (forward && !my.on && position == adapter.focusablePosition(count - 1) && adapter.isLibraryAt(count)) {
                 focusLibrary();
                 return true;
             }
@@ -2285,6 +2596,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             greeting.setTextColor(greetingColor);
         }
         if (shamsi) shamsiDate.setText(Shamsi.today(getResources()));
+        if (welcomeView != null) welcomeView.setText(welcomeText());
     }
 
     // ---- race-weekend panel (a theme's race_calendar) -----------------------------------------------

@@ -28,6 +28,8 @@ public class DockDecoration extends RecyclerView.ItemDecoration {
     private final boolean evenPadding;
     /** The band's top and bottom the glass gradient was made for; it is remade when they move. */
     private float shaderTop = Float.NaN, shaderBottom = Float.NaN;
+    /** my_home: the dock's logos float on the wallpaper with no band behind them; the offsets stay. */
+    boolean drawBand = true;
 
     /**
      * @param translucent the cinematic shelf's band: the artwork and the glow show through it.
@@ -75,6 +77,7 @@ public class DockDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+        if (!drawBand) return;
         boolean any = false;
         int cardWidth = 0;
         for (int i = 0; i < parent.getChildCount(); i++) {

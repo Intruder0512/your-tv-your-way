@@ -1,0 +1,43 @@
+# This TV: Hisense HiSmartTV A4 (xiaoyushan), Android TV 9, firmware PTMR.190127.037.
+# Based on examples/hisense-hismarttv-a4/debloat.txt, adjusted to the owner's choices.
+#
+# Apply:   TV_HOST=<tv ip> tools/disable.sh work/debloat.txt
+# Undo:    TV_HOST=<tv ip> tools/restore.sh work/debloat.txt
+# Everything is DISABLED, not uninstalled.
+#
+# Wait at least a minute after disable.sh before rebooting. Rebooting a few seconds after the last
+# `pm disable-user` lost every change on this set (all packages came back enabled); applied in one
+# pass with a 90 s wait, all 21 stayed disabled across the reboot. Nothing is re-enabled at boot.
+#
+# Kept by choice: Netflix, Prime Video, RemoteNOW, USB media player, firmware updates
+# (com.hisense.tv.ota, com.hisense.remoteupgrade), Assistant (katniss, pumpkin), Chromecast
+# (mediashell), Miracast (com.mediatek.androidbox), YouTube, Glance screensaver.
+
+# Group 1: telemetry
+com.hisense.app.logreport              # Hisense LogReportManagerService
+com.google.android.feedback
+com.google.android.tv.bugreportsender
+
+# Group 2: recommendation rows, retail demo, silent preload installs
+com.google.android.tvrecommendations
+com.google.android.leanbacklauncher.recommendations
+com.google.android.leanbacklauncher    # old launcher, not a HOME candidate on this firmware
+com.hisense.storemode
+fusion.android.tv.demo                 # retail display
+com.mstar.android.tv.disclaimercustomization   # store disclaimer screen
+android.autoinstalls.config.hisense.xiaoyushan
+
+# Group 3: preloaded apps
+com.seraphic.browser                   # Hisense browser
+com.google.android.music               # Play Music, discontinued
+com.google.android.videos
+com.google.android.play.games
+com.google.android.apps.nbu.smartconnect.tv
+
+# Group 4: extra streaming apps, off by choice
+com.lionsgateplay.videoapp
+com.discoveryplus.tv.android
+com.graymatrix.did                     # Zee5
+# com.sonyliv                          # kept: owner uses SonyLIV
+com.mxtech.videoplayer.television
+com.google.android.youtube.tvmusic

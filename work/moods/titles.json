@@ -1,0 +1,758 @@
+[
+ {
+  "title": "Iron Man",
+  "mood": "Capes and chaos",
+  "service": "jiohotstar",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.hotstar.com/in/movies/iron-man/1660000038",
+  "tmdb_type": "movie",
+  "tmdb_id": 1726,
+  "poster_path": "/78lPtwv72eTNqFW9COBYI0dWDJa.jpg",
+  "backdrop_path": "/cKvDv2LpwVEqbdXWoQl4XgGN6le.jpg",
+  "notes": "",
+  "moods": [
+   "Capes and chaos"
+  ]
+ },
+ {
+  "title": "Avengers: Endgame",
+  "mood": "Capes and chaos",
+  "service": "jiohotstar",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.hotstar.com/in/movies/avengers-endgame/1260013556",
+  "tmdb_type": "movie",
+  "tmdb_id": 299534,
+  "poster_path": "/bR8ISy1O9XQxqiy0fQFw2BX72RQ.jpg",
+  "backdrop_path": "/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
+  "notes": "",
+  "moods": [
+   "Capes and chaos"
+  ]
+ },
+ {
+  "title": "Loki",
+  "mood": "Capes and chaos",
+  "service": "jiohotstar",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.hotstar.com/in/shows/loki/1260063451",
+  "tmdb_type": "tv",
+  "tmdb_id": 84958,
+  "poster_path": "/37KxUQ9RAEEPLSWfmAl6T0HfIvu.jpg",
+  "backdrop_path": "/q3jHCb4dMfYF6ojikKuHd6LscxC.jpg",
+  "notes": "Hotstar content id 1260063525 (from JustWatch India). JustWatch gives the id-only URL; slugged form would likely be https://www.hotstar.com/in/shows/loki/1260063525 but that slug was not verified.",
+  "moods": [
+   "Capes and chaos"
+  ]
+ },
+ {
+  "title": "The Boys",
+  "mood": "Capes and chaos",
+  "service": "prime",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "amzn1.dv.gti.9ab600aa-6625-b547-cfc0-190e3ad8a27d",
+  "prime_url": "https://www.primevideo.com/detail/0S1FYJ3LY9KTL9C7WFFAGA9F6F",
+  "url": "https://www.primevideo.com/detail/0S1FYJ3LY9KTL9C7WFFAGA9F6F",
+  "tmdb_type": "tv",
+  "tmdb_id": 76479,
+  "poster_path": "/in1R2dDc421JxsoRWaIIAqVI2KE.jpg",
+  "backdrop_path": "/bq28ajZaoMyzEIm6REelqyqtEDZ.jpg",
+  "notes": "GTI is the series-level/Season 1 GTI from JustWatch India.",
+  "moods": [
+   "Capes and chaos"
+  ]
+ },
+ {
+  "title": "Invincible",
+  "mood": "Capes and chaos",
+  "service": "prime",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "amzn1.dv.gti.d4bc0a58-139a-abbc-046b-d9ffcd25c463",
+  "prime_url": "https://www.primevideo.com/detail/0K677J96WQ96K6UY6BL15O70CO",
+  "url": "https://www.primevideo.com/detail/0K677J96WQ96K6UY6BL15O70CO",
+  "tmdb_type": "tv",
+  "tmdb_id": 95557,
+  "poster_path": "/nRBCVeTGXJgTcXxbJT2bNdH2tMf.jpg",
+  "backdrop_path": "/9qrroces8C6R9aKr08hACNPVXdZ.jpg",
+  "notes": "GTI from JustWatch India (likely Season 1).",
+  "moods": [
+   "Capes and chaos"
+  ]
+ },
+ {
+  "title": "Spider-Man: Across the Spider-Verse",
+  "mood": "Capes and chaos",
+  "service": "none",
+  "service_changed": true,
+  "netflix_id": "",
+  "prime_gti": "amzn1.dv.gti.7a5ee336-1492-4170-bc14-94a83749b0d3",
+  "prime_url": "https://www.primevideo.com/detail/0MEEZSHBU5UU7SBB8J9K33HE4Z",
+  "url": "https://www.primevideo.com/detail/0MEEZSHBU5UU7SBB8J9K33HE4Z",
+  "tmdb_type": "movie",
+  "tmdb_id": 569094,
+  "poster_path": "/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+  "backdrop_path": "/kVd3a9YeLGkoeR50jGEXM6EqseS.jpg",
+  "notes": "Not on Netflix India. JustWatch India lists it only on the 'Sony Pictures' add-on channel inside Prime Video (paid channel on top of Prime, not base Prime). Not on base Prime, JioHotstar, SonyLIV or Airtel Xstream Play. prime_gti/prime_url given for the channel title in case you accept the add-on.",
+  "moods": [
+   "Capes and chaos"
+  ]
+ },
+ {
+  "title": "Panchayat",
+  "mood": "Comfort sitcom",
+  "service": "prime",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "amzn1.dv.gti.ceb88881-6a77-d28d-bd17-31c18d185b72",
+  "prime_url": "https://www.primevideo.com/detail/0KAFPP1MAADAFUOA6I2WR5D4TM",
+  "url": "https://www.primevideo.com/detail/0KAFPP1MAADAFUOA6I2WR5D4TM",
+  "tmdb_type": "tv",
+  "tmdb_id": 101352,
+  "poster_path": "/cPPhduQk1eX0MAE2JDaQRh3UZB5.jpg",
+  "backdrop_path": "/iZ8EtGAqKWZdRJPzWfFseNfVxjh.jpg",
+  "notes": "",
+  "moods": [
+   "Comfort sitcom"
+  ]
+ },
+ {
+  "title": "Gullak",
+  "mood": "Comfort sitcom",
+  "service": "sonyliv",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.sonyliv.com/shows/gullak-1700000659",
+  "tmdb_type": "tv",
+  "tmdb_id": 90966,
+  "poster_path": "/arn3mvRYSrEqO7vaKbH8QxM8EEK.jpg",
+  "backdrop_path": "/t0J74zw5N5Ux7CvvBtIHvjnSB4n.jpg",
+  "notes": "SonyLIV show id 1700000659 (show URL derived from JustWatch episode links, e.g. .../gullak-1700000659/nakli-paneer-1090533674). Some episodes free with ads.",
+  "moods": [
+   "Comfort sitcom"
+  ]
+ },
+ {
+  "title": "Brooklyn Nine-Nine",
+  "mood": "Comfort sitcom",
+  "service": "netflix",
+  "service_changed": false,
+  "netflix_id": "70281562",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.netflix.com/title/70281562",
+  "tmdb_type": "tv",
+  "tmdb_id": 48891,
+  "poster_path": "/mpjlDzVjp7oyHUe2LaF9ltKe6f1.jpg",
+  "backdrop_path": "/9AeiA1XtP5sel2tAf9LaGeUjhDb.jpg",
+  "notes": "Also on JioHotstar in India (https://www.hotstar.com/in/1271547881).",
+  "moods": [
+   "Comfort sitcom"
+  ]
+ },
+ {
+  "title": "The Office (US)",
+  "mood": "Comfort sitcom",
+  "service": "prime",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "amzn1.dv.gti.54a9f77b-9a3d-01d5-83b3-c30531685e9f",
+  "prime_url": "https://www.primevideo.com/detail/0RMLEWROKWCLRYETGB757AYS4L",
+  "url": "https://www.primevideo.com/detail/0RMLEWROKWCLRYETGB757AYS4L",
+  "tmdb_type": "tv",
+  "tmdb_id": 2316,
+  "poster_path": "/7DJKHzAi83BmQrWLrYYOqcoKfhR.jpg",
+  "backdrop_path": "/9vMzIrMIncPmtalcxh1MOrgcE6C.jpg",
+  "notes": "Also on Netflix India (title 70136120) and JioHotstar (https://www.hotstar.com/in/1971109218).",
+  "moods": [
+   "Comfort sitcom"
+  ]
+ },
+ {
+  "title": "Stranger Things",
+  "mood": "Edge of your seat",
+  "service": "netflix",
+  "service_changed": false,
+  "netflix_id": "80057281",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.netflix.com/title/80057281",
+  "tmdb_type": "tv",
+  "tmdb_id": 66732,
+  "poster_path": "/uOOtwVbSr4QDjAGIifLDwpb2Pdl.jpg",
+  "backdrop_path": "/9P4IIMYY3HifqeruZq0ZZ9g7YUi.jpg",
+  "notes": "",
+  "moods": [
+   "Edge of your seat"
+  ]
+ },
+ {
+  "title": "Money Heist",
+  "mood": "Edge of your seat",
+  "service": "netflix",
+  "service_changed": false,
+  "netflix_id": "80192098",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.netflix.com/title/80192098",
+  "tmdb_type": "tv",
+  "tmdb_id": 71446,
+  "poster_path": "/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg",
+  "backdrop_path": "/xGexTKCJDkl12dTW4YCBDXWb1AD.jpg",
+  "notes": "TMDB original title La Casa de Papel.",
+  "moods": [
+   "Edge of your seat"
+  ]
+ },
+ {
+  "title": "The Family Man",
+  "mood": "Edge of your seat",
+  "service": "prime",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "amzn1.dv.gti.2cb6867e-4128-f2d8-aa87-a8d47de77735",
+  "prime_url": "https://www.primevideo.com/detail/0RV81WUUHUNK1H2SSUO4FFF6T5",
+  "url": "https://www.primevideo.com/detail/0RV81WUUHUNK1H2SSUO4FFF6T5",
+  "tmdb_type": "tv",
+  "tmdb_id": 93352,
+  "poster_path": "/tE1NUJqw9gV6AVjQ1GTK78LbWJ9.jpg",
+  "backdrop_path": "/eEzKigDI64OomZV6VTJvoPGmVu1.jpg",
+  "notes": "",
+  "moods": [
+   "Edge of your seat"
+  ]
+ },
+ {
+  "title": "Mirzapur",
+  "mood": "Edge of your seat",
+  "service": "prime",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "amzn1.dv.gti.22b38631-10e1-d14e-c746-0ddf397aff71",
+  "prime_url": "https://www.primevideo.com/detail/0PDOKMV9CRLOMO5EUKNCUJLG4Q",
+  "url": "https://www.primevideo.com/detail/0PDOKMV9CRLOMO5EUKNCUJLG4Q",
+  "tmdb_type": "tv",
+  "tmdb_id": 84105,
+  "poster_path": "/p0qM8hhlMF5DuxHBzl2EZR6TehX.jpg",
+  "backdrop_path": "/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg",
+  "notes": "",
+  "moods": [
+   "Edge of your seat"
+  ]
+ },
+ {
+  "title": "Scam 1992: The Harshad Mehta Story",
+  "mood": "Edge of your seat",
+  "service": "sonyliv",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.sonyliv.com/shows/scam-1992-the-harshad-mehta-story-1700000292",
+  "tmdb_type": "tv",
+  "tmdb_id": 111188,
+  "poster_path": "/cBVPwBSVNSVtQocQfyHPFqoIohj.jpg",
+  "backdrop_path": "/tTYP1npvBU90NthceezScfXGiOl.jpg",
+  "notes": "SonyLIV show id 1700000292 (Hindi). Show URL derived from JustWatch episode link .../scam-1992-the-harshad-mehta-story-1700000292/cobra-killer-1000062136.",
+  "moods": [
+   "Edge of your seat"
+  ]
+ },
+ {
+  "title": "Jawan",
+  "mood": "Desi mass",
+  "service": "netflix",
+  "service_changed": false,
+  "netflix_id": "81728124",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.netflix.com/title/81728124",
+  "tmdb_type": "movie",
+  "tmdb_id": 872906,
+  "poster_path": "/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg",
+  "backdrop_path": "/5LtSjMNw6j3LkG29Oa4O0iY5U8.jpg",
+  "notes": "",
+  "moods": [
+   "Desi mass"
+  ]
+ },
+ {
+  "title": "Pushpa 2: The Rule",
+  "mood": "Desi mass",
+  "service": "netflix",
+  "service_changed": false,
+  "netflix_id": "82006666",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.netflix.com/title/82006666",
+  "tmdb_type": "movie",
+  "tmdb_id": 857598,
+  "poster_path": "/xkYGdKuK8jfqvGNCZV1uNdYkIfS.jpg",
+  "backdrop_path": "/7jGItf7idJsBm9QTNoTNTU3KiGe.jpg",
+  "notes": "",
+  "moods": [
+   "Desi mass"
+  ]
+ },
+ {
+  "title": "RRR",
+  "mood": "Desi mass",
+  "service": "netflix",
+  "service_changed": false,
+  "netflix_id": "81476453",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.netflix.com/title/81476453",
+  "tmdb_type": "movie",
+  "tmdb_id": 579974,
+  "poster_path": "/tjpiEnZBUAA8pdNPRKa5vP2Zpqw.jpg",
+  "backdrop_path": "/i0Y0wP8H6SRgjr6QmuwbtQbS24D.jpg",
+  "notes": "Netflix India carries the Hindi version; other language versions are on ZEE5.",
+  "moods": [
+   "Desi mass"
+  ]
+ },
+ {
+  "title": "Pathaan",
+  "mood": "Desi mass",
+  "service": "prime",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "amzn1.dv.gti.0639961c-07ad-4292-ac75-544aa069b89d",
+  "prime_url": "https://www.primevideo.com/detail/0FIVK55HUFIIADBSNC585CZFDP",
+  "url": "https://www.primevideo.com/detail/0FIVK55HUFIIADBSNC585CZFDP",
+  "tmdb_type": "movie",
+  "tmdb_id": 864692,
+  "poster_path": "/arf00BkwvXo0CFKbaD9OpqdE4Nu.jpg",
+  "backdrop_path": "/9wRAIQeOv2qzcgpfvA4dYZKeezl.jpg",
+  "notes": "",
+  "moods": [
+   "Desi mass"
+  ]
+ },
+ {
+  "title": "K.G.F: Chapter 2",
+  "mood": "Desi mass",
+  "service": "prime",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "amzn1.dv.gti.9f72e5c0-8dce-4d9c-bc54-c7ab9844f654",
+  "prime_url": "https://www.primevideo.com/detail/0OLFV66669RCQ9BSC7YCWOZA6S",
+  "url": "https://www.primevideo.com/detail/0OLFV66669RCQ9BSC7YCWOZA6S",
+  "tmdb_type": "movie",
+  "tmdb_id": 587412,
+  "poster_path": "/khNVygolU0TxLIDWff5tQlAhZ23.jpg",
+  "backdrop_path": "/nsV5Mfi9FAV4w8eDsdr7uqVswOk.jpg",
+  "notes": "",
+  "moods": [
+   "Desi mass"
+  ]
+ },
+ {
+  "title": "Dark",
+  "mood": "Mind games",
+  "service": "netflix",
+  "service_changed": false,
+  "netflix_id": "80100172",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.netflix.com/title/80100172",
+  "tmdb_type": "tv",
+  "tmdb_id": 70523,
+  "poster_path": "/wiiyc3m6HKaQhFBYeuM7ySCNQsG.jpg",
+  "backdrop_path": "/3jDXL4Xvj3AzDOF6UH1xeyHW8MH.jpg",
+  "notes": "",
+  "moods": [
+   "Mind games"
+  ]
+ },
+ {
+  "title": "Andhadhun",
+  "mood": "Mind games",
+  "service": "prime",
+  "service_changed": true,
+  "netflix_id": "",
+  "prime_gti": "amzn1.dv.gti.2213bd17-7a0c-476e-88b6-3cd250672c64",
+  "prime_url": "https://www.primevideo.com/detail/0H68JXDGRU0I9MW3EGRIAMNYHW",
+  "url": "https://www.primevideo.com/detail/0H68JXDGRU0I9MW3EGRIAMNYHW",
+  "tmdb_type": "movie",
+  "tmdb_id": 534780,
+  "poster_path": "/dy3K6hNvwE05siGgiLJcEiwgpdO.jpg",
+  "backdrop_path": "/73aKTjdQ46jpv3InqNVnV76Nl0K.jpg",
+  "notes": "Not on Netflix India per JustWatch India; on Prime Video (subscription). Also free-with-ads on JioHotstar (https://www.hotstar.com/in/movies/andhadhun/1271615661).",
+  "moods": [
+   "Mind games"
+  ]
+ },
+ {
+  "title": "Drishyam 2 (Hindi, 2022)",
+  "mood": "Mind games",
+  "service": "prime",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "amzn1.dv.gti.2a67b1bd-15a9-414c-97e9-8ccb8380eff4",
+  "prime_url": "https://www.primevideo.com/detail/0HNZIYOI76383DKI61QMTROL4K",
+  "url": "https://www.primevideo.com/detail/0HNZIYOI76383DKI61QMTROL4K",
+  "tmdb_type": "movie",
+  "tmdb_id": 1029827,
+  "poster_path": "/wk8Vu0DI0MiNLaXXiVqAwjLRKL5.jpg",
+  "backdrop_path": "/498aYGlnvjvoiqXYhCNHrZERi4l.jpg",
+  "notes": "Hindi 2022 remake (TMDB 1029827), not the 2021 Malayalam original (TMDB 706872, different GTI).",
+  "moods": [
+   "Mind games"
+  ]
+ },
+ {
+  "title": "Rocket Boys",
+  "mood": "Mind games",
+  "service": "sonyliv",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.sonyliv.com/shows/rocket-boys-1700000852",
+  "tmdb_type": "tv",
+  "tmdb_id": 138211,
+  "poster_path": "/mLtA1cAejDG4H67jf6RG6VbGbo3.jpg",
+  "backdrop_path": "/xhwbLfYfKimKYpzjzk5KOmGIWwX.jpg",
+  "notes": "SonyLIV show id 1700000852. Show URL derived from JustWatch episode link .../rocket-boys-1700000852/its-like-gravity-1000158651.",
+  "moods": [
+   "Mind games"
+  ]
+ },
+ {
+  "title": "Oh Humnava Tum Dena Saath Mera",
+  "mood": "Ghar ki kahaniyan",
+  "service": "jiohotstar",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.hotstar.com/in/shows/oh-humnava-tum-dena-saath-mera/1271616684",
+  "tmdb_type": "tv",
+  "tmdb_id": 318625,
+  "poster_path": "/4H91L8fsqBufCQIsAnSlirWu3eq.jpg",
+  "backdrop_path": "",
+  "notes": "'Tum Dena Saath Mera' is the 2026 StarPlus serial, renamed 'Oh Humnava Tum Dena Saath Mera' before launch (premiered 20 Apr 2026; Sriti Jha, Shabir Ahluwalia). JioHotstar show id 1271616684, resolved in the browser from the episode ids JustWatch lists (1271631594 = S1E1, 1641022838 = S1E44). Older shows with the same name (DD National 2010, Life OK 2011) are unrelated. TMDB has no no-language backdrop for this title, so backdrop_path is empty.",
+  "moods": [
+   "Ghar ki kahaniyan"
+  ]
+ },
+ {
+  "title": "Anupamaa",
+  "mood": "Ghar ki kahaniyan",
+  "service": "jiohotstar",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.hotstar.com/in/shows/anupama/1260022017",
+  "tmdb_type": "tv",
+  "tmdb_id": 116479,
+  "poster_path": "/i3ZcFxUiGr6HV5yv1i6n7uKHyj7.jpg",
+  "backdrop_path": "/wBu3BErMuZ51H701J8QjmoHdBHr.jpg",
+  "notes": "Show page checked in the browser (title 'Anupama'). TMDB poster/backdrops are 1280x720-class, low resolution.",
+  "moods": [
+   "Ghar ki kahaniyan"
+  ]
+ },
+ {
+  "title": "Yeh Rishta Kya Kehlata Hai",
+  "mood": "Ghar ki kahaniyan",
+  "service": "jiohotstar",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.hotstar.com/in/shows/yeh-rishta/586",
+  "tmdb_type": "tv",
+  "tmdb_id": 16413,
+  "poster_path": "/y9U6187kzOigTJiAezzYA875WGV.jpg",
+  "backdrop_path": "/5M4kx2WuO3iRuAWhk5SYKus6RMd.jpg",
+  "notes": "JioHotstar show id 586 (from Wikidata P11049); in the browser it redirects to /in/shows/yeh-rishta/586, which is the current show. JustWatch India only lists Tata Play for this show.",
+  "moods": [
+   "Ghar ki kahaniyan"
+  ]
+ },
+ {
+  "title": "Ghum Hai Kisikey Pyaar Meiin",
+  "mood": "Ghar ki kahaniyan",
+  "service": "jiohotstar",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.hotstar.com/in/shows/ghum-hai-kisikey-pyaar-meiin/1260043179",
+  "tmdb_type": "tv",
+  "tmdb_id": 111453,
+  "poster_path": "/u3NVGYCpkAgBArXogLuHPfpSNwG.jpg",
+  "backdrop_path": "",
+  "notes": "JioHotstar show id 1260043179, resolved in the browser from JustWatch's episode id 1000253056 (S1E1). JustWatch marks it free with ads on JioHotstar. TMDB has no no-language backdrop for this title, so backdrop_path is empty.",
+  "moods": [
+   "Ghar ki kahaniyan"
+  ]
+ },
+ {
+  "title": "Bade Achhe Lagte Hain 2",
+  "mood": "Ghar ki kahaniyan",
+  "service": "sonyliv",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.sonyliv.com/shows/bade-achhe-lagte-hain-1700000190",
+  "tmdb_type": "tv",
+  "tmdb_id": 308464,
+  "poster_path": "/wucZcLi7Os9ZkWZrIL1qmA5c3rQ.jpg",
+  "backdrop_path": "/eFURMw33sQG8INjK4DZNVJ6H4ko.jpg",
+  "notes": "On SonyLIV this is Season 2 of the combined show 'Bade Achhe Lagte Hain' (show id 1700000190, 4 seasons). Season 2 = Ram/Priya 2021 run, checked in the browser (E1 'Broken Hearts', 30 Aug 2021). The show-level URL is https://www.sonyliv.com/shows/bade-achhe-lagte-hain-1700000190. TMDB 308464 is the separate 'Bade Acche Lagte Hain 2' entry (the 2011 original is TMDB 39314). Only one backdrop on TMDB. Season URL showed Content not found in the TV app; show-level URL used.",
+  "moods": [
+   "Ghar ki kahaniyan"
+  ]
+ },
+ {
+  "title": "Taarak Mehta Ka Ooltah Chashmah",
+  "mood": "Ghar ki kahaniyan",
+  "service": "sonyliv",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.sonyliv.com/shows/taarak-mehta-ka-ooltah-chashmah-1700000084",
+  "tmdb_type": "tv",
+  "tmdb_id": 8630,
+  "poster_path": "/3p9EtiZJKV5L8CBYjjL2b4T8cWP.jpg",
+  "backdrop_path": "/ztBJOWaolee4DipbGeSJnCixk4F.jpg",
+  "notes": "SonyLIV show id 1700000084, checked in the browser. Latest episode needs a subscription; older episodes are free with ads.",
+  "moods": [
+   "Ghar ki kahaniyan"
+  ]
+ },
+ {
+  "title": "Crash Landing on You",
+  "mood": "K-drama nights",
+  "service": "netflix",
+  "service_changed": false,
+  "netflix_id": "81159258",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.netflix.com/title/81159258",
+  "tmdb_type": "tv",
+  "tmdb_id": 94796,
+  "poster_path": "/fgBNLPr6mC8pxuR79ENAJY4nBmj.jpg",
+  "backdrop_path": "/3yEHM2HT2vrUtO93YzTJNgEfiZG.jpg",
+  "notes": "",
+  "moods": [
+   "K-drama nights"
+  ]
+ },
+ {
+  "title": "Queen of Tears",
+  "mood": "K-drama nights",
+  "service": "netflix",
+  "service_changed": false,
+  "netflix_id": "81707950",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.netflix.com/title/81707950",
+  "tmdb_type": "tv",
+  "tmdb_id": 215720,
+  "poster_path": "/7ZXLZ3KYL3IVvsSHBZaHjcNQzNU.jpg",
+  "backdrop_path": "/wcP3FsRLog4GNEs9PFrDKKQdcof.jpg",
+  "notes": "",
+  "moods": [
+   "K-drama nights"
+  ]
+ },
+ {
+  "title": "Vincenzo",
+  "mood": "K-drama nights",
+  "service": "netflix",
+  "service_changed": false,
+  "netflix_id": "81365087",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.netflix.com/title/81365087",
+  "tmdb_type": "tv",
+  "tmdb_id": 117376,
+  "poster_path": "/8pch7Z1iys5csXmD4yMR7S2K7qp.jpg",
+  "backdrop_path": "/sf7NCqyVUNoyjYuwW5oJke1T1lH.jpg",
+  "notes": "",
+  "moods": [
+   "K-drama nights"
+  ]
+ },
+ {
+  "title": "Business Proposal",
+  "mood": "K-drama nights",
+  "service": "netflix",
+  "service_changed": false,
+  "netflix_id": "81509440",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.netflix.com/title/81509440",
+  "tmdb_type": "tv",
+  "tmdb_id": 154825,
+  "poster_path": "/iLh7L8ZuvgdxFaM9sImyv2iKYLe.jpg",
+  "backdrop_path": "/lq0YqJuffMuZhoKTiC5xDqvtCSn.jpg",
+  "notes": "Not the 2025 movie 'A Business Proposal' (Netflix 82041378).",
+  "moods": [
+   "K-drama nights"
+  ]
+ },
+ {
+  "title": "Squid Game",
+  "mood": "K-drama nights",
+  "service": "netflix",
+  "service_changed": false,
+  "netflix_id": "81040344",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.netflix.com/title/81040344",
+  "tmdb_type": "tv",
+  "tmdb_id": 93405,
+  "poster_path": "/iE21DSI3n5vI6v1W2HT4feKoM97.jpg",
+  "backdrop_path": "/2meX1nMdScFOoV4370rqHWKmXhY.jpg",
+  "notes": "",
+  "moods": [
+   "K-drama nights"
+  ]
+ },
+ {
+  "title": "Descendants of the Sun",
+  "mood": "K-drama nights",
+  "service": "netflix",
+  "service_changed": false,
+  "netflix_id": "80123798",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.netflix.com/title/80123798",
+  "tmdb_type": "tv",
+  "tmdb_id": 65143,
+  "poster_path": "/xxGomfml0x9iyPBS4StBjbRRu65.jpg",
+  "backdrop_path": "/4ODaZrnKT7iM6sfgDB8ud8FdrVr.jpg",
+  "notes": "No guess was given; it is on Netflix India (subscription). Also free with ads on JioHotstar (https://www.hotstar.com/in/1971040884, not checked) and ZEE5.",
+  "moods": [
+   "K-drama nights"
+  ]
+ },
+ {
+  "title": "Bigg Boss (Hindi)",
+  "mood": "Reality rumble",
+  "service": "jiohotstar",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.hotstar.com/in/shows/bigg-boss/1971002586",
+  "tmdb_type": "tv",
+  "tmdb_id": 11436,
+  "poster_path": "/AspHixRhWg5q8sOER7BoZ3U6xsn.jpg",
+  "backdrop_path": "/aNjKIoBIxxdvxxP7wqDYCs2eD70.jpg",
+  "notes": "Seasons are tabs on one JioHotstar show page, with no separate season URLs. The show page opens on Season 20 (running, Salman Khan; checked in the browser 23 Oct 2026).",
+  "moods": [
+   "Reality rumble"
+  ]
+ },
+ {
+  "title": "MTV Roadies",
+  "mood": "Reality rumble",
+  "service": "jiohotstar",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.hotstar.com/in/shows/mtv-roadies/1971002274",
+  "tmdb_type": "tv",
+  "tmdb_id": 8426,
+  "poster_path": "/rxuX0kszEyVJLDVIZLiZHOcM65y.jpg",
+  "backdrop_path": "/2kEe8kiXc0cJUdmwIjnhXwxIEPL.jpg",
+  "notes": "JioHotstar show id 1971002274. The show page opens on Season 21 'Roadies - Rebirth' (2026, running). Seasons are tabs, not separate URLs; episode links use the slug 'roadies-rebirth' with the same id. JustWatch India had no offer for the current season. TMDB backdrops are 1280x720.",
+  "moods": [
+   "Reality rumble"
+  ]
+ },
+ {
+  "title": "Khatron Ke Khiladi",
+  "mood": "Reality rumble",
+  "service": "jiohotstar",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.hotstar.com/in/shows/khatron-ke-khiladi/1971002588",
+  "tmdb_type": "tv",
+  "tmdb_id": 85518,
+  "poster_path": "/kHXlvY8SRHmGyipgBxaTbfgEeIy.jpg",
+  "backdrop_path": "/gtJZZN83NktigLyM3n7eJq6ppAS.jpg",
+  "notes": "JioHotstar show id 1971002588, found with JioHotstar's own search (2026, Colors). Seasons are tabs, not separate URLs. JustWatch India had no offer. TMDB 85518 'Khatron Ke Khiladi' (Season 15 in 2026) is used, not the older duplicate 7523 'Fear Factor: Khatron Ke Khiladi' (no poster). JustWatch's tmdbId 73730 is a 404 on TMDB.",
+  "moods": [
+   "Reality rumble"
+  ]
+ },
+ {
+  "title": "Shark Tank India",
+  "mood": "Reality rumble",
+  "service": "sonyliv",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.sonyliv.com/shows/shark-tank-india-1700000741",
+  "tmdb_type": "tv",
+  "tmdb_id": 153870,
+  "poster_path": "/iGw6R4e4G07xjffVifFLSN3dEAb.jpg",
+  "backdrop_path": "/tLL91JBiCCvBF7oKSN6dFR7yd8c.jpg",
+  "notes": "SonyLIV show id 1700000741. URL is the Season 5 (latest) page, checked in the browser; show-level is https://www.sonyliv.com/shows/shark-tank-india-1700000741. TMDB has only 2 low-res backdrops (1435x807). Season URL showed Content not found in the TV app; show-level URL used.",
+  "moods": [
+   "Reality rumble"
+  ]
+ },
+ {
+  "title": "Indian Idol",
+  "mood": "Reality rumble",
+  "service": "sonyliv",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.sonyliv.com/shows/indian-idol-legends-return-1790007916",
+  "tmdb_type": "tv",
+  "tmdb_id": 13700,
+  "poster_path": "/jCMw8httzGvjTu0NZjiclqUQD6c.jpg",
+  "backdrop_path": "/qlnDrGpDmvKPQEnpge8yY3XTm0F.jpg",
+  "notes": "Latest edition is 'Indian Idol - Legends Return', a separate SonyLIV show (id 1790007916; premiered 17 Oct 2026, Himesh Reshammiya judging former contestants). The previous regular season, Indian Idol 16 (Oct 2025-Jul 2026), is at https://www.sonyliv.com/shows/indian-idol-1700001014. Both checked in the browser.",
+  "moods": [
+   "Reality rumble"
+  ]
+ },
+ {
+  "title": "Kaun Banega Crorepati",
+  "mood": "Reality rumble",
+  "service": "sonyliv",
+  "service_changed": false,
+  "netflix_id": "",
+  "prime_gti": "",
+  "prime_url": "",
+  "url": "https://www.sonyliv.com/shows/kaun-banega-crorepati-1700000195",
+  "tmdb_type": "tv",
+  "tmdb_id": 911,
+  "poster_path": "/8srHjzgZq9V9sgsTkIwGARDyADj.jpg",
+  "backdrop_path": "/u0306BuqVMpMR7y57OpWZnm7WLI.jpg",
+  "notes": "SonyLIV show id 1700000195. The show page opens on 'KBC 2026' (Season 18, running; checked in the browser). Seasons are year tabs, and no separate season URL was found.",
+  "moods": [
+   "Reality rumble"
+  ]
+ }
+]

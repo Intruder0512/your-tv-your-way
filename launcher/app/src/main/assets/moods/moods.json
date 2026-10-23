@@ -1,0 +1,453 @@
+{
+ "moods": [
+  {
+   "name": "Capes and chaos",
+   "color": "#E5484D"
+  },
+  {
+   "name": "Comfort sitcom",
+   "color": "#F2B84B"
+  },
+  {
+   "name": "Edge of your seat",
+   "color": "#8B5CF6"
+  },
+  {
+   "name": "Desi mass",
+   "color": "#FF8A1F"
+  },
+  {
+   "name": "Mind games",
+   "color": "#2EC4B6"
+  },
+  {
+   "name": "Ghar ki kahaniyan",
+   "color": "#E8618C"
+  },
+  {
+   "name": "K-drama nights",
+   "color": "#FF8FC8"
+  },
+  {
+   "name": "Reality rumble",
+   "color": "#22C55E"
+  },
+  {
+   "name": "Anything at all",
+   "color": "#B8C0CC",
+   "all": true
+  }
+ ],
+ "titles": [
+  {
+   "title": "Iron Man",
+   "pkg": "in.startv.hotstar",
+   "link": "https://www.hotstar.com/in/movies/iron-man/1660000038",
+   "moods": [
+    "Capes and chaos"
+   ],
+   "poster": "iron-man.jpg",
+   "backdrop": "iron-man.jpg"
+  },
+  {
+   "title": "Avengers: Endgame",
+   "pkg": "in.startv.hotstar",
+   "link": "https://www.hotstar.com/in/movies/avengers-endgame/1260013556",
+   "moods": [
+    "Capes and chaos"
+   ],
+   "poster": "avengers-endgame.jpg",
+   "backdrop": "avengers-endgame.jpg"
+  },
+  {
+   "title": "Loki",
+   "pkg": "in.startv.hotstar",
+   "link": "https://www.hotstar.com/in/shows/loki/1260063451",
+   "moods": [
+    "Capes and chaos"
+   ],
+   "poster": "loki.jpg",
+   "backdrop": "loki.jpg"
+  },
+  {
+   "title": "The Boys",
+   "pkg": "com.amazon.amazonvideo.livingroom",
+   "link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.9ab600aa-6625-b547-cfc0-190e3ad8a27d",
+   "moods": [
+    "Capes and chaos"
+   ],
+   "poster": "the-boys.jpg",
+   "backdrop": "the-boys.jpg"
+  },
+  {
+   "title": "Invincible",
+   "pkg": "com.amazon.amazonvideo.livingroom",
+   "link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.d4bc0a58-139a-abbc-046b-d9ffcd25c463",
+   "moods": [
+    "Capes and chaos"
+   ],
+   "poster": "invincible.jpg",
+   "backdrop": "invincible.jpg"
+  },
+  {
+   "title": "Panchayat",
+   "pkg": "com.amazon.amazonvideo.livingroom",
+   "link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.ceb88881-6a77-d28d-bd17-31c18d185b72",
+   "moods": [
+    "Comfort sitcom"
+   ],
+   "poster": "panchayat.jpg",
+   "backdrop": "panchayat.jpg"
+  },
+  {
+   "title": "Gullak",
+   "pkg": "com.sonyliv",
+   "link": "https://www.sonyliv.com/shows/gullak-1700000659",
+   "moods": [
+    "Comfort sitcom"
+   ],
+   "poster": "gullak.jpg",
+   "backdrop": "gullak.jpg"
+  },
+  {
+   "title": "Brooklyn Nine-Nine",
+   "pkg": "com.netflix.ninja",
+   "link": "https://www.netflix.com/title/70281562",
+   "moods": [
+    "Comfort sitcom"
+   ],
+   "poster": "brooklyn-nine-nine.jpg",
+   "backdrop": "brooklyn-nine-nine.jpg"
+  },
+  {
+   "title": "The Office",
+   "pkg": "com.amazon.amazonvideo.livingroom",
+   "link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.54a9f77b-9a3d-01d5-83b3-c30531685e9f",
+   "moods": [
+    "Comfort sitcom"
+   ],
+   "poster": "the-office-us.jpg",
+   "backdrop": "the-office-us.jpg"
+  },
+  {
+   "title": "Stranger Things",
+   "pkg": "com.netflix.ninja",
+   "link": "https://www.netflix.com/title/80057281",
+   "moods": [
+    "Edge of your seat"
+   ],
+   "poster": "stranger-things.jpg",
+   "backdrop": "stranger-things.jpg"
+  },
+  {
+   "title": "Money Heist",
+   "pkg": "com.netflix.ninja",
+   "link": "https://www.netflix.com/title/80192098",
+   "moods": [
+    "Edge of your seat"
+   ],
+   "poster": "money-heist.jpg",
+   "backdrop": "money-heist.jpg"
+  },
+  {
+   "title": "The Family Man",
+   "pkg": "com.amazon.amazonvideo.livingroom",
+   "link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.2cb6867e-4128-f2d8-aa87-a8d47de77735",
+   "moods": [
+    "Edge of your seat"
+   ],
+   "poster": "the-family-man.jpg",
+   "backdrop": "the-family-man.jpg"
+  },
+  {
+   "title": "Mirzapur",
+   "pkg": "com.amazon.amazonvideo.livingroom",
+   "link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.22b38631-10e1-d14e-c746-0ddf397aff71",
+   "moods": [
+    "Edge of your seat"
+   ],
+   "poster": "mirzapur.jpg",
+   "backdrop": "mirzapur.jpg"
+  },
+  {
+   "title": "Scam 1992: The Harshad Mehta Story",
+   "pkg": "com.sonyliv",
+   "link": "https://www.sonyliv.com/shows/scam-1992-the-harshad-mehta-story-1700000292",
+   "moods": [
+    "Edge of your seat"
+   ],
+   "poster": "scam-1992-the-harshad-mehta-story.jpg",
+   "backdrop": "scam-1992-the-harshad-mehta-story.jpg"
+  },
+  {
+   "title": "Jawan",
+   "pkg": "com.netflix.ninja",
+   "link": "https://www.netflix.com/title/81728124",
+   "moods": [
+    "Desi mass"
+   ],
+   "poster": "jawan.jpg",
+   "backdrop": "jawan.jpg"
+  },
+  {
+   "title": "Pushpa 2: The Rule",
+   "pkg": "com.netflix.ninja",
+   "link": "https://www.netflix.com/title/82006666",
+   "moods": [
+    "Desi mass"
+   ],
+   "poster": "pushpa-2-the-rule.jpg",
+   "backdrop": "pushpa-2-the-rule.jpg"
+  },
+  {
+   "title": "RRR",
+   "pkg": "com.netflix.ninja",
+   "link": "https://www.netflix.com/title/81476453",
+   "moods": [
+    "Desi mass"
+   ],
+   "poster": "rrr.jpg",
+   "backdrop": "rrr.jpg"
+  },
+  {
+   "title": "Pathaan",
+   "pkg": "com.amazon.amazonvideo.livingroom",
+   "link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.0639961c-07ad-4292-ac75-544aa069b89d",
+   "moods": [
+    "Desi mass"
+   ],
+   "poster": "pathaan.jpg",
+   "backdrop": "pathaan.jpg"
+  },
+  {
+   "title": "K.G.F: Chapter 2",
+   "pkg": "com.amazon.amazonvideo.livingroom",
+   "link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.9f72e5c0-8dce-4d9c-bc54-c7ab9844f654",
+   "moods": [
+    "Desi mass"
+   ],
+   "poster": "k-g-f-chapter-2.jpg",
+   "backdrop": "k-g-f-chapter-2.jpg"
+  },
+  {
+   "title": "Dark",
+   "pkg": "com.netflix.ninja",
+   "link": "https://www.netflix.com/title/80100172",
+   "moods": [
+    "Mind games"
+   ],
+   "poster": "dark.jpg",
+   "backdrop": "dark.jpg"
+  },
+  {
+   "title": "Andhadhun",
+   "pkg": "com.amazon.amazonvideo.livingroom",
+   "link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.2213bd17-7a0c-476e-88b6-3cd250672c64",
+   "moods": [
+    "Mind games"
+   ],
+   "poster": "andhadhun.jpg",
+   "backdrop": "andhadhun.jpg"
+  },
+  {
+   "title": "Drishyam 2",
+   "pkg": "com.amazon.amazonvideo.livingroom",
+   "link": "https://app.primevideo.com/detail?gti=amzn1.dv.gti.2a67b1bd-15a9-414c-97e9-8ccb8380eff4",
+   "moods": [
+    "Mind games"
+   ],
+   "poster": "drishyam-2-hindi-2022.jpg",
+   "backdrop": "drishyam-2-hindi-2022.jpg"
+  },
+  {
+   "title": "Rocket Boys",
+   "pkg": "com.sonyliv",
+   "link": "https://www.sonyliv.com/shows/rocket-boys-1700000852",
+   "moods": [
+    "Mind games"
+   ],
+   "poster": "rocket-boys.jpg",
+   "backdrop": "rocket-boys.jpg"
+  },
+  {
+   "title": "Oh Humnava Tum Dena Saath Mera",
+   "pkg": "in.startv.hotstar",
+   "link": "https://www.hotstar.com/in/shows/oh-humnava-tum-dena-saath-mera/1271616684",
+   "moods": [
+    "Ghar ki kahaniyan"
+   ],
+   "poster": "oh-humnava-tum-dena-saath-mera.jpg",
+   "backdrop": "oh-humnava-tum-dena-saath-mera.jpg"
+  },
+  {
+   "title": "Anupamaa",
+   "pkg": "in.startv.hotstar",
+   "link": "https://www.hotstar.com/in/shows/anupama/1260022017",
+   "moods": [
+    "Ghar ki kahaniyan"
+   ],
+   "poster": "anupamaa.jpg",
+   "backdrop": "anupamaa.jpg"
+  },
+  {
+   "title": "Yeh Rishta Kya Kehlata Hai",
+   "pkg": "in.startv.hotstar",
+   "link": "https://www.hotstar.com/in/shows/yeh-rishta/586",
+   "moods": [
+    "Ghar ki kahaniyan"
+   ],
+   "poster": "yeh-rishta-kya-kehlata-hai.jpg",
+   "backdrop": "yeh-rishta-kya-kehlata-hai.jpg"
+  },
+  {
+   "title": "Ghum Hai Kisikey Pyaar Meiin",
+   "pkg": "in.startv.hotstar",
+   "link": "https://www.hotstar.com/in/shows/ghum-hai-kisikey-pyaar-meiin/1260043179",
+   "moods": [
+    "Ghar ki kahaniyan"
+   ],
+   "poster": "ghum-hai-kisikey-pyaar-meiin.jpg",
+   "backdrop": "ghum-hai-kisikey-pyaar-meiin.jpg"
+  },
+  {
+   "title": "Bade Achhe Lagte Hain 2",
+   "pkg": "com.sonyliv",
+   "link": "https://www.sonyliv.com/shows/bade-achhe-lagte-hain-1700000190",
+   "moods": [
+    "Ghar ki kahaniyan"
+   ],
+   "poster": "bade-achhe-lagte-hain-2.jpg",
+   "backdrop": "bade-achhe-lagte-hain-2.jpg"
+  },
+  {
+   "title": "Taarak Mehta Ka Ooltah Chashmah",
+   "pkg": "com.sonyliv",
+   "link": "https://www.sonyliv.com/shows/taarak-mehta-ka-ooltah-chashmah-1700000084",
+   "moods": [
+    "Ghar ki kahaniyan"
+   ],
+   "poster": "taarak-mehta-ka-ooltah-chashmah.jpg",
+   "backdrop": "taarak-mehta-ka-ooltah-chashmah.jpg"
+  },
+  {
+   "title": "Crash Landing on You",
+   "pkg": "com.netflix.ninja",
+   "link": "https://www.netflix.com/title/81159258",
+   "moods": [
+    "K-drama nights"
+   ],
+   "poster": "crash-landing-on-you.jpg",
+   "backdrop": "crash-landing-on-you.jpg"
+  },
+  {
+   "title": "Queen of Tears",
+   "pkg": "com.netflix.ninja",
+   "link": "https://www.netflix.com/title/81707950",
+   "moods": [
+    "K-drama nights"
+   ],
+   "poster": "queen-of-tears.jpg",
+   "backdrop": "queen-of-tears.jpg"
+  },
+  {
+   "title": "Vincenzo",
+   "pkg": "com.netflix.ninja",
+   "link": "https://www.netflix.com/title/81365087",
+   "moods": [
+    "K-drama nights"
+   ],
+   "poster": "vincenzo.jpg",
+   "backdrop": "vincenzo.jpg"
+  },
+  {
+   "title": "Business Proposal",
+   "pkg": "com.netflix.ninja",
+   "link": "https://www.netflix.com/title/81509440",
+   "moods": [
+    "K-drama nights"
+   ],
+   "poster": "business-proposal.jpg",
+   "backdrop": "business-proposal.jpg"
+  },
+  {
+   "title": "Squid Game",
+   "pkg": "com.netflix.ninja",
+   "link": "https://www.netflix.com/title/81040344",
+   "moods": [
+    "K-drama nights"
+   ],
+   "poster": "squid-game.jpg",
+   "backdrop": "squid-game.jpg"
+  },
+  {
+   "title": "Descendants of the Sun",
+   "pkg": "com.netflix.ninja",
+   "link": "https://www.netflix.com/title/80123798",
+   "moods": [
+    "K-drama nights"
+   ],
+   "poster": "descendants-of-the-sun.jpg",
+   "backdrop": "descendants-of-the-sun.jpg"
+  },
+  {
+   "title": "Bigg Boss",
+   "pkg": "in.startv.hotstar",
+   "link": "https://www.hotstar.com/in/shows/bigg-boss/1971002586",
+   "moods": [
+    "Reality rumble"
+   ],
+   "poster": "bigg-boss-hindi.jpg",
+   "backdrop": "bigg-boss-hindi.jpg"
+  },
+  {
+   "title": "MTV Roadies",
+   "pkg": "in.startv.hotstar",
+   "link": "https://www.hotstar.com/in/shows/mtv-roadies/1971002274",
+   "moods": [
+    "Reality rumble"
+   ],
+   "poster": "mtv-roadies.jpg",
+   "backdrop": "mtv-roadies.jpg"
+  },
+  {
+   "title": "Khatron Ke Khiladi",
+   "pkg": "in.startv.hotstar",
+   "link": "https://www.hotstar.com/in/shows/khatron-ke-khiladi/1971002588",
+   "moods": [
+    "Reality rumble"
+   ],
+   "poster": "khatron-ke-khiladi.jpg",
+   "backdrop": "khatron-ke-khiladi.jpg"
+  },
+  {
+   "title": "Shark Tank India",
+   "pkg": "com.sonyliv",
+   "link": "https://www.sonyliv.com/shows/shark-tank-india-1700000741",
+   "moods": [
+    "Reality rumble"
+   ],
+   "poster": "shark-tank-india.jpg",
+   "backdrop": "shark-tank-india.jpg"
+  },
+  {
+   "title": "Indian Idol",
+   "pkg": "com.sonyliv",
+   "link": "https://www.sonyliv.com/shows/indian-idol-legends-return-1790007916",
+   "moods": [
+    "Reality rumble"
+   ],
+   "poster": "indian-idol.jpg",
+   "backdrop": "indian-idol.jpg"
+  },
+  {
+   "title": "Kaun Banega Crorepati",
+   "pkg": "com.sonyliv",
+   "link": "https://www.sonyliv.com/shows/kaun-banega-crorepati-1700000195",
+   "moods": [
+    "Reality rumble"
+   ],
+   "poster": "kaun-banega-crorepati.jpg",
+   "backdrop": "kaun-banega-crorepati.jpg"
+  }
+ ]
+}

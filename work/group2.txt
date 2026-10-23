@@ -1,0 +1,8 @@
+com.google.android.tvrecommendations
+com.google.android.leanbacklauncher.recommendations
+com.google.android.leanbacklauncher    # old launcher, not a HOME candidate on this firmware
+com.hisense.storemode
+fusion.android.tv.demo                 # retail display
+com.mstar.android.tv.disclaimercustomization   # store disclaimer screen
+android.autoinstalls.config.hisense.xiaoyushan
+

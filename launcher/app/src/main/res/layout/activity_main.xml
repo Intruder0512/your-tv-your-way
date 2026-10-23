@@ -30,6 +30,41 @@
         android:layout_height="match_parent"
         android:alpha="0" />
 
+    <!-- my_home: a black gradient up from the bottom so the dock sits on dark, and a flat shade that deepens as
+         the page scrolls down (MainActivity). Gone otherwise. -->
+    <View
+        android:id="@+id/myBottomShade"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:importantForAccessibility="no" />
+
+    <View
+        android:id="@+id/myScrollShade"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FF000000"
+        android:alpha="0"
+        android:visibility="gone"
+        android:importantForAccessibility="no" />
+
+    <!-- my_home's mood cards: a darkened black-and-white scene behind the deck, two layers to crossfade. -->
+    <ImageView
+        android:id="@+id/myDeckSceneA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:alpha="0"
+        android:importantForAccessibility="no" />
+
+    <ImageView
+        android:id="@+id/myDeckSceneB"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:alpha="0"
+        android:importantForAccessibility="no" />
+
     <!-- Race-weekend panel (a theme's race_calendar, see RaceWeekend): in the free space under the clock,
          shown only from shortly before a weekend's first session until the race is over. Updated once a
          minute with the clock, never animated. -->
@@ -147,6 +182,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

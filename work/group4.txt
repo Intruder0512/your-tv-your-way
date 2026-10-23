@@ -1,0 +1,6 @@
+com.lionsgateplay.videoapp
+com.discoveryplus.tv.android
+com.graymatrix.did                     # Zee5
+# com.sonyliv                          # kept: owner uses SonyLIV
+com.mxtech.videoplayer.television
+com.google.android.youtube.tvmusic
