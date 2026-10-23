@@ -24,6 +24,27 @@ TV Settings > Device Preferences > Developer options > **USB debugging** on, the
 "Allow USB debugging?" prompt on the TV. Run the commands from **Git Bash** in the `cyt` folder.
 If the TV's IP changed, pass the new one as the first argument.
 
+## Your own values (kept out of git)
+
+Two files hold what is personal to this TV and are listed in `.gitignore`, so `git push` never sends them:
+
+- `work/local.env`: `TV_HOST=<tv ip>`. `work/build-and-install.sh` and `work/restore.sh` read it, so
+  the address need not be typed. Without it, pass the address as the first argument.
+- `launcher/app/src/release/res/values/my_personal.xml`: your name (`my_name`) and weather location
+  (`my_weather_latitude`, `my_weather_longitude`). Release builds use these in place of the placeholders
+  in `my_home.xml`:
+
+  ```xml
+  <resources>
+      <string name="my_name" translatable="false">Your name</string>
+      <string name="my_weather_latitude" translatable="false">28.61</string>
+      <string name="my_weather_longitude" translatable="false">77.21</string>
+  </resources>
+  ```
+
+Posters, backdrops, wallpapers and the white app logos stay local too (`.gitignore`); rebuild them with
+`work/make_moods.py` and `work/make_logos.py`.
+
 ## Re-enable one app
 
 ```bash

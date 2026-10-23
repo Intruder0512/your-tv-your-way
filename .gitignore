@@ -38,3 +38,7 @@ launcher/replay_pid*.log
 launcher/app/src/main/assets/moods/posters/
 launcher/app/src/main/assets/moods/backdrops/
 launcher/app/src/main/res/drawable-nodpi/banner_logo_*.png
+
+# This TV's own values, kept out of the repo: name and weather location (overrides my_home.xml in release
+# builds) and the TV's address (read by work/build-and-install.sh and work/restore.sh).
+launcher/app/src/release/res/values/my_personal.xml

@@ -4,6 +4,8 @@
 # Needs USB debugging switched on again on the TV (Settings > Device Preferences > Developer options).
 set -euo pipefail
 cd "$(dirname "$0")/.."
+# work/local.env (not committed) can hold TV_HOST=<tv ip>, so the address need not be typed each time.
+if [ -f work/local.env ]; then . work/local.env; fi
 export TV_HOST="${1:-${TV_HOST:?give the TV's IP address: $0 <tv ip>}}"
 TC="$HOME/.cleanyourtv/toolchain"
 SHORT_TMP="$HOME/.cleanyourtv/tmp"; mkdir -p "$SHORT_TMP"
